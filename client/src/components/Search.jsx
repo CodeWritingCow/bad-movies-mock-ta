@@ -39,7 +39,7 @@ class Search extends React.Component {
         </select>
         <br/><br/>
 
-        <button>Search</button>
+        <button onClick={() => {this.props.getMovies()}}>Search</button>
 
       </div>
     );
