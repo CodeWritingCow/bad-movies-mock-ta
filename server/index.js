@@ -33,6 +33,11 @@ app.get('/search', function(req, res) {
   // use this endpoint to search for movies by genres (using API key): https://api.themoviedb.org/3/discover/movie
 
   // and sort them by votes (worst first) using the search parameters in themoviedb API
+
+  apiHelpers.getMoviesByGenre(35) // TODO: Change '35' to genreId sent by client request
+  .then((data) => {
+    res.send(data);
+  });
 });
 
 
