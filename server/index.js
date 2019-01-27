@@ -21,10 +21,12 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/genres', function(req, res) {
   // make an axios request to get the official list of genres from themoviedb
-  
   // use this endpoint. you will need your API key from signup: https://api.themoviedb.org/3/genre/movie/list
-
   // send back
+  apiHelpers.getGenreList()
+  .then((data) => {
+    res.send(data);
+  });
 });
 
 app.get('/search', function(req, res) {

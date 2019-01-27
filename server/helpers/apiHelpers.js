@@ -13,8 +13,9 @@ const { API_KEY } = require('../../config.js');
 
 // get official list of genres from themoviedb
 let getGenreList = function () {
-    axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
+    return axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
       .then(function(res) {
+        //   console.log(res.data.genres);
           return res.data.genres;
       })
       .catch(function (err) {
