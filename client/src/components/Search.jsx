@@ -5,7 +5,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genres: [1,2,3]
+      genres: []
     };
     this.getGenres = this.getGenres.bind(this);
   }
@@ -18,7 +18,6 @@ class Search extends React.Component {
         let result = res.data.map((genre) => {
           return genre.name;
         });
-        // console.log(result);
       this.setState({ genres: result })
     }).catch((error) => {
       console.log(error);
@@ -26,7 +25,6 @@ class Search extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     return (
       <div className="search">
         <button onClick={() => {this.props.swapFavorites()}}>{this.props.showFaves ? "Show Results" : "Show Favorites"}</button>
@@ -36,10 +34,8 @@ class Search extends React.Component {
         {/* How can you tell which option has been selected from here? */}
 
         <select onClick={()=> {this.getGenres()}}>
-        {/* <select> */}
-          {/* { this.props.genres.map((genre) => <option value={genre}>{genre}</option>) } */}
-          {/* { [1,2,3].map((num) => <option value={num}>{num}</option>) } */}
-          { this.state.genres.map((genre) => <option value={genre}>{genre}</option>) }
+          <option>Select Genre</option>
+          { this.state.genres.map((genre) => <option value={genre} key={genre}>{genre}</option>) }
         </select>
         <br/><br/>
 
