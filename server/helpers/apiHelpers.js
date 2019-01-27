@@ -23,6 +23,18 @@ let getGenreList = function () {
       });
 }
 
+let getMoviesByGenre = function(genreId) {
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.asc&with_genres=${genreId}`)
+    .then(function(res) {
+        return res.data.genres;
+    })
+    .catch(function (err) {
+        console.log(err);
+        return err;
+    });
+}
+
 module.exports = {
-    getGenreList: getGenreList
+    getGenreList: getGenreList,
+    getMoviesByGenre: getMoviesByGenre
 };
