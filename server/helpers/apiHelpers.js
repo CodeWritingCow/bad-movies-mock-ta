@@ -25,7 +25,7 @@ let getGenreList = function () {
 }
 
 let getMoviesByGenre = function(genreId) {
-    return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.asc&with_genres=${genreId}`)
+    return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=vote_average.asc&with_genres=${genreId}`)
     .then(function(res) {
         console.log(res.data.results);
         return res.data.results;
