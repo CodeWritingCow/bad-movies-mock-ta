@@ -21,11 +21,8 @@ class App extends React.Component {
 
   getMovies() {
     // make an axios request to your server on the GET SEARCH endpoint
-    // let that = this;
     axios.get('/search')
       .then((response) => {
-        // console.log(response.data);
-        // that.setState({movies: data});
         this.setState({movies: response.data});
       })
       .catch((error) => {
