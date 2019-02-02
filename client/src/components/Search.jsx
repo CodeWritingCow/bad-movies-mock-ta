@@ -5,9 +5,15 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genres: []
+      genres: [],
+      value: 'Select Genre'
     };
     this.getGenres = this.getGenres.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
 
@@ -15,10 +21,11 @@ class Search extends React.Component {
     //make an axios request in this component to get the list of genres from your endpoint GET GENRES
     axios.get('/genres')
       .then((res) => {
-        let result = res.data.map((genre) => {
-          return genre.name;
-        });
-      this.setState({ genres: result })
+      //   let result = res.data.map((genre) => {
+      //     return genre.name;
+      //   });
+      // this.setState({ genres: result })
+      this.setState({ genres: res.data })
     }).catch((error) => {
       console.log(error);
     });
@@ -33,13 +40,13 @@ class Search extends React.Component {
         {/* Make the select options dynamic from genres !!! */}
         {/* How can you tell which option has been selected from here? */}
 
-        <select onClick={()=> {this.getGenres()}}>
-          <option>Select Genre</option>
-          { this.state.genres.map((genre) => <option value={genre} key={genre}>{genre}</option>) }
+        <select value={this.state.value} onClick={()=> {this.getGenres()}} onChange={this.handleChange}>
+          <option value='Select Genre'>Select Genre</option>
+          { this.state.genres.map((genre) => <option value={genre.id} key={genre.name}>{genre.name}</option>) }
         </select>
         <br/><br/>
 
-        <button onClick={() => {this.props.getMovies()}}>Search</button>
+        <button onClick={() => {this.props.getMovies(this.state.value)}}>Search</button>
 
       </div>
     );

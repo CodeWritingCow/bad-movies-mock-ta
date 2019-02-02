@@ -19,9 +19,9 @@ class App extends React.Component {
     this.getMovies = this.getMovies.bind(this);
   }
 
-  getMovies() {
+  getMovies(genre) {
     // make an axios request to your server on the GET SEARCH endpoint
-    axios.get('/search')
+    axios.post(`/search/${genre}`)
       .then((response) => {
         this.setState({movies: response.data});
       })
