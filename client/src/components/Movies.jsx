@@ -13,6 +13,8 @@ class Movies extends React.Component {
   // You can tell which list is currently being rendered based on whether the prop "showFaves" is false (search results) or true (fave list) (within index.jsx)
 
   render() {
+    // console.log(this.props.showFaves);
+    
     return (
       <ul className="movies">
 
@@ -20,7 +22,7 @@ class Movies extends React.Component {
         {/* Make this list dynamic! */}
         { this.props.movies.map((movie) => 
 
-        <li className="movie_item">
+        <li className="movie_item" onClick={ this.props.showFaves ? () => {this.props.deleteMovie(movie)} : () => {this.props.saveMovie(movie)} }>
           {/* <img src="https://lh3.googleusercontent.com/97gnjRiv2zIRnDupzfxYFoI-6zlIK3jKgb6KOCDf_tjWkY9epbITdSFIbiKhuccOqQ=w300" /> */}
           <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
           <div className="movie_description">
