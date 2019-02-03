@@ -35,11 +35,23 @@ class App extends React.Component {
 
   saveMovie(movie) {
     // same as above but do something diff
-    console.log('Moo: saveMovie() ', movie);    
-    // axios.post(`/save`)
-    //   .then((response) => {
-    //     this.setState({})
-    //   })
+
+    // console.log('Moo: saveMovie() ', movie);    
+    axios.post(`/save`, {
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+      release_date: movie.release_date,
+      popularity: movie.popularity,
+      genre_ids: movie.genre_ids
+    })
+      .then((response) => {
+        // console.log(response);
+        this.setState({favorites: response.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   deleteMovie(movie) {

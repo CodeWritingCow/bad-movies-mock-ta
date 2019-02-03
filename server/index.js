@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request')
 var app = express();
+var { saveMovie } = require('../db/mongodb/index');
+var { Movie } = require('../db/mongodb/index');
 
 // Sign up and get your moviedb API key here:
 // https://www.themoviedb.org/account/signup
@@ -33,8 +35,7 @@ app.post('/search/:genre', function(req, res) {
   // use this endpoint to search for movies by genres (using API key): https://api.themoviedb.org/3/discover/movie
 
   // and sort them by votes (worst first) using the search parameters in themoviedb API
-console.log(req.params.genre)
-  apiHelpers.getMoviesByGenre(req.params.genre) // TODO: Change '35' to genreId sent by client request
+  apiHelpers.getMoviesByGenre(req.params.genre)
   .then((data) => {
     res.send(data);
   });
@@ -44,7 +45,23 @@ console.log(req.params.genre)
 app.post('/save', function(req, res) {
 
   //save movie as favorite
+  // console.log(req.body);
+  saveMovie(req.body);
 
+  let query = Movie.find({});
+    query.exec(function (err, movies) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(movies);
+      }
+    });
+  // .then((data) => {
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+    
 });
 
 app.post('/delete', function(req, res) {
