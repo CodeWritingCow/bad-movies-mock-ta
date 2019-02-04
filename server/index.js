@@ -67,6 +67,24 @@ app.post('/save', function(req, res) {
 app.post('/delete', function(req, res) {
 
   //remove movie from favorites
+  console.log(req.body);
+  Movie.findOneAndDelete({id: req.body.id}, function (err, response) {
+    if (err) {
+      console.log(err);
+    } else {
+      let query = Movie.find({});
+      query.exec(function (err, movies) {
+        if (err) {
+          console.log(err);
+        } else {
+          // console.log(movies);
+          res.send(movies);
+        }
+      });      
+    }
+  });
+
+
 
 });
 

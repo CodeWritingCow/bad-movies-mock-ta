@@ -46,7 +46,7 @@ class App extends React.Component {
       genre_ids: movie.genre_ids
     })
       .then((response) => {
-        // console.log(response);
+        // console.log('saveMovie ', response);
         this.setState({favorites: response.data});
       })
       .catch((err) => {
@@ -56,7 +56,17 @@ class App extends React.Component {
 
   deleteMovie(movie) {
     // same as above but do something diff
-    console.log('Moo: deleteMovie() ', movie);
+    // console.log('Moo: deleteMovie() ', movie);
+    axios.post('/delete', {
+      id: movie.id
+    })
+    .then((response) => {
+      // console.log(response.data)
+      this.setState({favorites: response.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   swapFavorites() {
