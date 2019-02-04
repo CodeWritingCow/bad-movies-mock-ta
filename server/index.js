@@ -41,10 +41,23 @@ app.post('/search/:genre', function(req, res) {
   });
 });
 
+// get all favorite movies from database
+app.get('/favorites', function (req, res) {
+  let query = Movie.find({});
+      query.exec(function (err, movies) {
+        if (err) {
+          console.log(err);
+        } else {
+          // console.log(movies);
+          res.send(movies);
+        }
+      }); 
+})
+
 
 app.post('/save', function(req, res) {
 
-  //save movie as favorite
+  // save movie as favorite
   // console.log(req.body);
   saveMovie(req.body);
 
