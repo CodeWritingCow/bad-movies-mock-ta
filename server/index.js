@@ -49,18 +49,21 @@ app.post('/save', function(req, res) {
   saveMovie(req.body);
 
   let query = Movie.find({});
-    query.exec(function (err, movies) {
+    query.exec(function (err, response) {
       if (err) {
         console.log(err);
       } else {
-        res.send(movies);
+        let allFavorites = Movie.find({});
+              allFavorites.exec(function (err, movies) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  // console.log(movies);
+                  res.send(movies);
+                }
+              });      
       }
     });
-  // .then((data) => {
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
     
 });
 
